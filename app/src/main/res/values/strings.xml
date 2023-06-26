@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AA1_Mobile</string>
+    <string name="app_title">LifeCare</string>
+    <string name="logotipo">Logotipo</string>
+    <string name="title_activity_agendamento">Agendamento</string>
+    <string name="profissionalButton">Botao do profissional</string>
+
+
 </resources>
