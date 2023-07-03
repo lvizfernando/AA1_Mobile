@@ -4,6 +4,7 @@
     <string name="logotipo">Logotipo</string>
     <string name="title_activity_agendamento">Agendamento</string>
     <string name="profissionalButton">Botao do profissional</string>
-
+    <string name="agendamentoButton">Agendar</string>
+    <string name="loading">Carregando</string>
 
 </resources>
