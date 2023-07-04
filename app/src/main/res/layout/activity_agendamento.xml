@@ -7,12 +7,14 @@
     tools:context=".Agendamento">
 
     <!-- Header -->
+
     <View
         android:id="@+id/headerBackground"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@color/blue"
+        android:background="@color/lightblue"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,15 +30,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
         tools:ignore="ContentDescription" />
-
-    <Button
-        android:id="@+id/btnVoltar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headerBackground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
