@@ -5,6 +5,7 @@
     <string name="title_activity_agendamento">Agendamento</string>
     <string name="bookButton">Agendar</string>
     <string name="ImgProfissional">Imagem do profissional</string>
+    <string name="textView">Profissionais Disponíveis:</string>
 
 
 </resources>
