@@ -6,6 +6,7 @@
     <string name="bookButton">Agendar</string>
     <string name="ImgProfissional">Imagem do profissional</string>
     <string name="textView">Profissionais Disponíveis:</string>
+    <string name="textView2">STRING TESTE</string>
 
 
 </resources>

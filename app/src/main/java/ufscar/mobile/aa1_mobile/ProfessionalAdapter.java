@@ -70,6 +70,7 @@ public class ProfessionalAdapter extends RecyclerView.Adapter<ProfessionalAdapte
         Intent intent = new Intent(context, Agendamento.class);
         // Passar dados extras para a tela de agendamento, se necessário
         intent.putExtra("nomeProfissional", professional.getName());
+        intent.putExtra("especialidadeProfissional", professional.getSpecialty());
         // Iniciar a nova atividade
         context.startActivity(intent);
     }

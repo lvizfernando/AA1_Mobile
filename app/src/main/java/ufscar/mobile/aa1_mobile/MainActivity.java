@@ -37,16 +37,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void CreateProfessionals(){
-        Professional professional = new Professional("Carlos José", "Pediatra",R.drawable.pediatra);
+        Professional professional = new Professional("Alda Hideko", "Pediatra",R.drawable.pediatra, 0);
         professionalList.add(professional);
 
-         professional = new Professional("Felipe Araújo", "Oftalmologista",R.drawable.oftalmo);
+         professional = new Professional("Felipe Araújo", "Oftalmologista",R.drawable.oftalmo, 1);
         professionalList.add(professional);
 
-         professional = new Professional("Pedro Santana", "Rinolaringologista",R.drawable.rino);
+         professional = new Professional("Pedro Santana", "Rinolaringologista",R.drawable.rino, 2);
         professionalList.add(professional);
 
-        professional = new Professional("Amanda Silva", "Cardiologista",R.drawable.cardio);
+        professional = new Professional("Amanda Silva", "Cardiologista",R.drawable.cardio, 3);
         professionalList.add(professional);
     }
 }

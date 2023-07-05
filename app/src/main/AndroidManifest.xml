@@ -19,6 +19,8 @@
             android:label="@string/title_activity_agendamento"
             android:theme="@style/Theme.AA1_Mobile" />
         <activity
+            android:name=".Consultas" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
