@@ -1,5 +1,7 @@
 package ufscar.mobile.aa1_mobile;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ProfessionalAdapter extends RecyclerView.Adapter<ProfessionalAdapter.ProfessionalViewHolder> {
+    private final Context context;
     private List<Professional> professionalList;
-    public ProfessionalAdapter(List<Professional> lista){
+    public ProfessionalAdapter(Context context, List<Professional> lista){
+        this.context = context;
         this.professionalList = lista;
     }
     @NonNull
@@ -48,7 +52,26 @@ public class ProfessionalAdapter extends RecyclerView.Adapter<ProfessionalAdapte
             especialidade = itemView.findViewById(R.id.professionalSpecialty);
             imagem = itemView.findViewById(R.id.professionalImage);
             agendar = itemView.findViewById(R.id.bookButton);
+            agendar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Chamar o método para lidar com o clique no botão de agendamento
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        Professional professional = professionalList.get(position);
+                        abrirTelaAgendamento(professional);
+                    }
+                }
+            });
         }
+    }
+    private void abrirTelaAgendamento(Professional professional) {
+        // Criar uma Intent para abrir a tela de agendamento
+        Intent intent = new Intent(context, Agendamento.class);
+        // Passar dados extras para a tela de agendamento, se necessário
+        intent.putExtra("nomeProfissional", professional.getName());
+        // Iniciar a nova atividade
+        context.startActivity(intent);
     }
 
 }

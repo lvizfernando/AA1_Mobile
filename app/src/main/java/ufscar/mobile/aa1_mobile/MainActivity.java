@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.CreateProfessionals();
 
-        ProfessionalAdapter professionalAdapter = new ProfessionalAdapter(professionalList);
+        ProfessionalAdapter professionalAdapter = new ProfessionalAdapter(this, professionalList);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
