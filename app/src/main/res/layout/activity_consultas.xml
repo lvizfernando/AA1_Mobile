@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Agendamento">
+    tools:context=".Consultas">
 
     <!-- Header -->
 
@@ -31,49 +31,13 @@
         app:layout_constraintVertical_bias="0.5"
         tools:ignore="ContentDescription" />
 
-    <!-- DatePicker -->
-
-    <!-- TimePicker -->
-
-    <!-- Botão Confirmar -->
-
-    <DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="84dp"
-        android:datePickerMode="spinner"
-        app:layout_constraintTop_toBottomOf="@+id/headerBackground"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:timePickerMode="spinner"
-        app:layout_constraintBottom_toBottomOf="@+id/btnConfirmar"
-        app:layout_constraintTop_toBottomOf="@+id/datePicker"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <Button
-        android:id="@+id/btnConfirmar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Confirmar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timePicker" />
-
     <TextView
-        android:id="@+id/textProfessional"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:text="@string/textView2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/headerBackground" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

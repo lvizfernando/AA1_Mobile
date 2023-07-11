@@ -2,6 +2,7 @@ package ufscar.mobile.aa1_mobile;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,9 @@ public class ProfessionalAdapter extends RecyclerView.Adapter<ProfessionalAdapte
     public ProfessionalAdapter(Context context, List<Professional> lista){
         this.context = context;
         this.professionalList = lista;
+        for(Professional p : lista){
+            Log.d("ID Profissional", String.valueOf(p.getPosicao()+1));
+        }
     }
     @NonNull
     @Override
@@ -69,7 +73,7 @@ public class ProfessionalAdapter extends RecyclerView.Adapter<ProfessionalAdapte
         // Criar uma Intent para abrir a tela de agendamento
         Intent intent = new Intent(context, Agendamento.class);
         // Passar dados extras para a tela de agendamento, se necessário
-        intent.putExtra("nomeProfissional", professional.getName());
+        intent.putExtra("idProfissional", professional.getPosicao()+1);
         // Iniciar a nova atividade
         context.startActivity(intent);
     }

@@ -4,26 +4,42 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ufscar.mobile.aa1_mobile.databinding.ActivityMainBinding;
+import ufscar.mobile.aa1_mobile.service.Profissional;
+import ufscar.mobile.aa1_mobile.MainViewModel;
+
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ProfessionalAdapter professionalAdapter;
     private List<Professional> professionalList = new ArrayList<>();
+    private MainViewModel mainViewModel;
+
+    private Boolean isNetworkAvailable(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +48,49 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
 
-        this.CreateProfessionals();
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-        ProfessionalAdapter professionalAdapter = new ProfessionalAdapter(this, professionalList);
+        // Wait for connection
+        while (!isNetworkAvailable()) {
+        }
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(professionalAdapter);
-
+        // Get and set profissionais from json
+        mainViewModel.pullProfissionais();
+        mainViewModel.getProfissionais().observe(this, profissionais -> {
+            for (Profissional q : profissionais) {
+                this.CreateProfessionals(q);
+            }
+            ProfessionalAdapter professionalAdapter = new ProfessionalAdapter(this, professionalList);
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(professionalAdapter);
+        });
     }
-    public void CreateProfessionals(){
-        Professional professional = new Professional("Carlos José", "Pediatra",R.drawable.pediatra);
-        professionalList.add(professional);
 
-         professional = new Professional("Felipe Araújo", "Oftalmologista",R.drawable.oftalmo);
-        professionalList.add(professional);
+    public void CreateProfessionals(Profissional p){
+        // Setting imageId
+        int drawId;
+        switch (p.getImageId()) {
+            case "pediatra":
+                drawId = R.drawable.pediatra;
+                break;
+            case "oftalmo":
+                drawId = R.drawable.oftalmo;
+                break;
+            case "rino":
+                drawId = R.drawable.rino;
+                break;
+            case "cardio":
+                drawId = R.drawable.cardio;
+                break;
+            default:
+                drawId = R.drawable.pediatra;
+                break;
+        }
 
-         professional = new Professional("Pedro Santana", "Rinolaringologista",R.drawable.rino);
-        professionalList.add(professional);
+        Log.d("Profissional String", p.toString());
 
-        professional = new Professional("Amanda Silva", "Cardiologista",R.drawable.cardio);
+        Professional professional = new Professional(p.getName(), p.getSpeciality(), drawId, p.getId()-1);
         professionalList.add(professional);
     }
 }

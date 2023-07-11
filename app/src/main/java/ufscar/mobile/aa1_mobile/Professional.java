@@ -6,10 +6,13 @@ public class Professional {
     private String specialty;
     private int imageId;
 
-    public Professional(String name, String specialty, int imageId) {
+    private int posicao;
+
+    public Professional(String name, String specialty, int imageId, int posicao) {
         this.name = name;
         this.specialty = specialty;
         this.imageId = imageId;
+        this.posicao = posicao;
     }
 
     public String getName() {
@@ -23,5 +26,7 @@ public class Professional {
     public int getImageId() {
         return imageId;
     }
+
+    public  int getPosicao(){return posicao;}
 }
 
