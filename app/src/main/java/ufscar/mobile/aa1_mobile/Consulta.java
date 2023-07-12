@@ -5,7 +5,7 @@ public class Consulta {
     private String nomeProfissional;
     private String especialidadeProfissional;
 
-    public Consulta(int dia, int mes, int hora, int minuto, int ano,  String nomeProfissional, String especialidadeProfissional) {
+    public Consulta(int dia, int mes, int ano, int hora, int minuto,  String nomeProfissional, String especialidadeProfissional) {
         this.dia = dia;
         this.mes = mes;
         this.hora = hora;
@@ -53,6 +53,10 @@ public class Consulta {
 
     public void setAno(int ano) {
         this.ano = ano;
+    }
+
+    public String getDataFormatada() {
+        return String.format("%02d/%02d/%04d %02d:%02d", dia, mes, ano, hora, minuto);
     }
 
     public String getNomeProfissional() {
