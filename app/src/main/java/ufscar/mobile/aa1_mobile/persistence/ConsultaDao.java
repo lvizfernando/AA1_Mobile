@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 @Dao
 public interface ConsultaDao {
@@ -24,6 +25,9 @@ public interface ConsultaDao {
     @Insert
     Completable insertConsulta(Consulta consulta);
 
+    @Query("DELETE FROM consulta WHERE id = :id")
+    Completable deleteById(int id);
+
     @Delete
-    void delete(Consulta consulta);
+    Completable delete(Consulta... consulta);
 }

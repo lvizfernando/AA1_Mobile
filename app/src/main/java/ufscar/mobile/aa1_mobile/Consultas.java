@@ -28,10 +28,14 @@ public class Consultas extends AppCompatActivity {
     boolean loading = true;
     private RecyclerView recyclerView;
     private List<Consulta> consultaList = new ArrayList<>();
+    private ConsultaDao consultaDao;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultas);
         recyclerView = findViewById(R.id.recyclerConsultas);
+
+        consultaDao = ConsultaDatabase.getInstance(this).consultaDao();
 
         populateConsultas();
 
@@ -50,7 +54,6 @@ public class Consultas extends AppCompatActivity {
     }
 
     private void populateConsultas(){
-        ConsultaDao consultaDao = ConsultaDatabase.getInstance(this).consultaDao();
         consultaDao.getAll().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(consultas -> {
                     for (Consulta consulta : consultas) {
