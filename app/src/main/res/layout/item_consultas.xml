@@ -39,6 +39,13 @@
             android:textSize="16sp"
             tools:text="Especialidade" />
 
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:insetTop="12dp"
+            android:text="@string/deleteButton" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

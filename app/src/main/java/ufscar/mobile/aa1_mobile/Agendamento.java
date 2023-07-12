@@ -109,7 +109,7 @@ public class Agendamento extends AppCompatActivity {
 
                 },  throwable -> {
 
-                });;
+                });
 
         Log.d("Room error", "none happened");
 
