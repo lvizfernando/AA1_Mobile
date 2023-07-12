@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -55,6 +56,7 @@ public class Agendamento extends AppCompatActivity {
         mainViewModel.pullProfissional(idProfissional);
         mainViewModel.getProfissional().observe(this, profissa -> {
             profissional = profissa;
+            updateLabels();
         });
 
         imgHeader.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +70,7 @@ public class Agendamento extends AppCompatActivity {
                 finish();
             }
         });
+
         // Configurar DatePicker
         datePicker = findViewById(R.id.datePicker);
 
@@ -75,16 +78,6 @@ public class Agendamento extends AppCompatActivity {
         timePicker = findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
 
-        TextView t=(TextView)findViewById(R.id.textProfessional);
-        t.setText(profissional.getName());
-
-        // Configurar botão Confirmar
-        btnConfirmar = findViewById(R.id.btnConfirmar);
-        btnConfirmar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
         // Configurar botão Confirmar
         btnConfirmar = findViewById(R.id.btnConfirmar);
         btnConfirmar.setOnClickListener(new View.OnClickListener() {
@@ -107,24 +100,37 @@ public class Agendamento extends AppCompatActivity {
                 consulta.setNomeProfissional(profissional.getName());
                 consulta.setEspecialidadeProfissional(profissional.getSpeciality());
 
-                // Adicionar a consulta à lista de consultas
-                List<Consulta> consultas = new ArrayList<>();
-                consultas.add(consulta);
-
-
-                // Criar uma Intent para abrir a ConsultasActivity
-                Intent intent = new Intent(Agendamento.this, Consultas.class);
-                // Passar a data e o horário selecionados como extras
-                intent.putExtra("dia", dia);
-                intent.putExtra("mes", mes);
-                intent.putExtra("ano", ano);
-                intent.putExtra("hora", hora);
-                intent.putExtra("minuto", minuto);
-                intent.putExtra("nomeProfissional", profissional.getSpeciality());
-                intent.putExtra("especialidadeProfissional", profissional.getSpeciality());
-                // Iniciar a nova atividade
-                startActivity(intent);
+                uploadConsulta(consulta);
             }
         });
+    }
+
+    private void uploadConsulta(Consulta consulta){
+        // Adicionar a consulta à lista de consultas
+        List<Consulta> consultas = new ArrayList<>();
+        consultas.add(consulta);
+
+        // Criar uma Intent para abrir a ConsultasActivity
+        Intent intent = new Intent(Agendamento.this, Consultas.class);
+
+        // Passar a data e o horário selecionados como extras
+        intent.putExtra("dia", consulta.getDia());
+        intent.putExtra("mes", consulta.getMes());
+        intent.putExtra("ano", consulta.getAno());
+        intent.putExtra("hora", consulta.getHora());
+        intent.putExtra("minuto", consulta.getMinuto());
+        intent.putExtra("idProfissional", profissional.getId());
+        intent.putExtra("nomeProfissional", profissional.getSpeciality());
+        intent.putExtra("especialidadeProfissional", profissional.getSpeciality());
+
+        // Iniciar a nova atividade
+        startActivity(intent);
+    }
+
+    private void updateLabels(){
+        Log.d("Updating", "Now");
+
+        TextView t=(TextView)findViewById(R.id.textProfessional);
+        t.setText(profissional.getName());
     }
 }
