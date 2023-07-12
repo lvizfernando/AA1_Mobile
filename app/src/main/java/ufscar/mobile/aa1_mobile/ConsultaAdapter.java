@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ufscar.mobile.aa1_mobile.persistence.Consulta;
+
 public class ConsultaAdapter extends RecyclerView.Adapter<ConsultaAdapter.ConsultaViewHolder> {
     private List<Consulta> consultaList;
 
@@ -46,7 +48,6 @@ public class ConsultaAdapter extends RecyclerView.Adapter<ConsultaAdapter.Consul
             data = itemView.findViewById(R.id.textViewDate);
             nomeprofissional = itemView.findViewById(R.id.textViewName);
             especialidadeprofissional = itemView.findViewById(R.id.textViewSpecialty);
-
         }
     }
 }

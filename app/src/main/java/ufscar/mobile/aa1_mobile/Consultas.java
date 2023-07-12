@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,8 +15,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import ufscar.mobile.aa1_mobile.ConsultaAdapter;
+import ufscar.mobile.aa1_mobile.persistence.Consulta;
+import ufscar.mobile.aa1_mobile.persistence.ConsultaDao;
+import ufscar.mobile.aa1_mobile.persistence.ConsultaDatabase;
+
 
 public class Consultas extends AppCompatActivity {
+    boolean loading = true;
     private RecyclerView recyclerView;
     private List<Consulta> consultaList = new ArrayList<>();
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,24 +33,7 @@ public class Consultas extends AppCompatActivity {
         setContentView(R.layout.activity_consultas);
         recyclerView = findViewById(R.id.recyclerConsultas);
 
-        Intent it = getIntent();
-        int dia = getIntent().getIntExtra("dia", -1);
-        int mes = getIntent().getIntExtra("mes", -1);
-        int ano = getIntent().getIntExtra("ano", -1);
-        int hora = getIntent().getIntExtra("hora", -1);
-        int minuto = getIntent().getIntExtra("minuto", -1);
-        String nomeProfissional = getIntent().getStringExtra("nomeProfissional");
-        String especialidadeProfissional = getIntent().getStringExtra("especialidadeProfissional");
-
-        Consulta consulta = new Consulta(dia, mes, ano, hora, minuto, nomeProfissional, especialidadeProfissional);
-        consultaList.add(consulta);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        ConsultaAdapter consultaAdapter = new ConsultaAdapter(consultaList);
-        recyclerView.setAdapter(consultaAdapter);
-
-        consultaAdapter.notifyDataSetChanged();
+        populateConsultas();
 
         ImageView imgHeader = findViewById(R.id.headerImage);
         imgHeader.setOnClickListener(new View.OnClickListener() {
@@ -54,5 +47,24 @@ public class Consultas extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void populateConsultas(){
+        ConsultaDao consultaDao = ConsultaDatabase.getInstance(this).consultaDao();
+        consultaDao.getAll().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(consultas -> {
+                    for (Consulta consulta : consultas) {
+                        consultaList.add(consulta);
+                        Log.d("Conteudo consulta", consulta.getNomeProfissional());
+                    }
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                    recyclerView.setLayoutManager(layoutManager);
+                    ConsultaAdapter consultaAdapter = new ConsultaAdapter(consultaList);
+                    recyclerView.setAdapter(consultaAdapter);
+
+                    consultaAdapter.notifyDataSetChanged();
+                });
+
+        Log.d("Room error", "completed");
     }
 }

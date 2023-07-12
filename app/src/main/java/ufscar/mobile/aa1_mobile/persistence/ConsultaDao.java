@@ -8,14 +8,15 @@ import androidx.room.Delete;
 import java.util.List;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 
 @Dao
 public interface ConsultaDao {
     @Query("SELECT * FROM consulta")
-    List<Consulta> getAll();
+    Flowable<List<Consulta>> getAll();
 
     @Query("SELECT * FROM consulta WHERE id IN (:consultaIds)")
-    List<Consulta> loadAllByIds(int[] consultaIds);
+    Flowable<List<Consulta>> loadAllByIds(int[] consultaIds);
 
     @Query("SELECT * FROM consulta WHERE id_profissional LIKE :consultaId LIMIT 1")
     Consulta findByConsultaId(int consultaId);
