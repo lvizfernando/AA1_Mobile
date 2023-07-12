@@ -12,7 +12,11 @@
     <string name="dateText">Data</string>
     <string name="timeText">Horário</string>
     <string name="ImgProfissional">Imagem do profissional</string>
-    <string name="textView">Profissionais Disponíveis:</string>
-    <string name="textView2">STRING TESTE</string>
+    <string name="textView">Profissionais disponíveis</string>
+
+    <string name="titleAgendamnento">Agendamento</string>
+    <string name="dataTitle">Data</string>
+    <string name="timeTitle">Horário</string>
+    <string name="btnConfirmar">Confirmar</string>
 
 </resources>

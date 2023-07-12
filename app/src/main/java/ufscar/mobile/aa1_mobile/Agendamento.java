@@ -75,8 +75,8 @@ public class Agendamento extends AppCompatActivity {
         timePicker = findViewById(R.id.timePicker);
         timePicker.setIs24HourView(true);
 
-        TextView t=(TextView)findViewById(R.id.textProfessional);
-        t.setText(profissional.getName());
+        //TextView t=(TextView)findViewById(R.id.textProfessional);
+        //t.setText(profissional.getName());
 
         // Configurar botão Confirmar
         btnConfirmar = findViewById(R.id.btnConfirmar);
