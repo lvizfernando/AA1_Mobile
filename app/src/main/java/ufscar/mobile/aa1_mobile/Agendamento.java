@@ -19,16 +19,22 @@ import android.widget.TimePicker;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import androidx.appcompat.app.AppCompatActivity;
+
 import ufscar.mobile.aa1_mobile.service.Profissional;
+import ufscar.mobile.aa1_mobile.persistence.ConsultaDao;
+import ufscar.mobile.aa1_mobile.persistence.ConsultaDatabase;
+import ufscar.mobile.aa1_mobile.persistence.Consulta;
 
 public class Agendamento extends AppCompatActivity {
-    private MainViewModel mainViewModel;
     private Button btnConfirmar;
     private DatePicker datePicker;
     private TimePicker timePicker;
-    private Professional professional;
-
-    private Profissional profissional;
 
     private Boolean isNetworkAvailable(){
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -44,20 +50,8 @@ public class Agendamento extends AppCompatActivity {
         ImageView imgHeader = findViewById(R.id.headerImage);
         // Obter o objeto Professional selecionado na MainActivity
         int idProfissional = getIntent().getIntExtra("idProfissional", 1);
-
-        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-
-        profissional = new Profissional();
-
-        // Wait for connection
-        while(!isNetworkAvailable()){}
-
-        // Get and set profissionais from json
-        mainViewModel.pullProfissional(idProfissional);
-        mainViewModel.getProfissional().observe(this, profissa -> {
-            profissional = profissa;
-            updateLabels();
-        });
+        String nomeProfissional = getIntent().getStringExtra("nomeProfissional");
+        String especialidadeProfissional = getIntent().getStringExtra("especialidadeProfissional");
 
         imgHeader.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,13 +86,15 @@ public class Agendamento extends AppCompatActivity {
                 int hora = timePicker.getHour();
                 int minuto = timePicker.getMinute();
                 // Criar um novo objeto Consulta com os detalhes da consulta
-                Consulta consulta = new Consulta(dia, mes, hora, minuto, ano, profissional.getName(), profissional.getSpeciality());
+                Consulta consulta = new Consulta(dia, mes, hora, minuto, ano, idProfissional, nomeProfissional, especialidadeProfissional);
                 consulta.setDia(dia);
                 consulta.setHora(hora);
                 consulta.setMinuto(minuto);
+                consulta.setMes(mes);
                 consulta.setAno(ano);
-                consulta.setNomeProfissional(profissional.getName());
-                consulta.setEspecialidadeProfissional(profissional.getSpeciality());
+                consulta.setIdProfissional(idProfissional);
+                consulta.setNomeProfissional(nomeProfissional);
+                consulta.setEspecialidadeProfissional(especialidadeProfissional);
 
                 uploadConsulta(consulta);
             }
@@ -113,24 +109,18 @@ public class Agendamento extends AppCompatActivity {
         // Criar uma Intent para abrir a ConsultasActivity
         Intent intent = new Intent(Agendamento.this, Consultas.class);
 
-        // Passar a data e o horário selecionados como extras
-        intent.putExtra("dia", consulta.getDia());
-        intent.putExtra("mes", consulta.getMes());
-        intent.putExtra("ano", consulta.getAno());
-        intent.putExtra("hora", consulta.getHora());
-        intent.putExtra("minuto", consulta.getMinuto());
-        intent.putExtra("idProfissional", profissional.getId());
-        intent.putExtra("nomeProfissional", profissional.getSpeciality());
-        intent.putExtra("especialidadeProfissional", profissional.getSpeciality());
+        ConsultaDao consultaDao = ConsultaDatabase.getInstance(this).consultaDao();
+        consultaDao.insertConsulta(consulta).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> {
+
+                },  throwable -> {
+
+                });;
+
+        Log.d("Room error", "none happened");
 
         // Iniciar a nova atividade
         startActivity(intent);
-    }
-
-    private void updateLabels(){
-        Log.d("Updating", "Now");
-
-        TextView t=(TextView)findViewById(R.id.textProfessional);
-        t.setText(profissional.getName());
     }
 }
