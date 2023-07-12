@@ -46,6 +46,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ImageView imageView = findViewById(R.id.HomeImagem);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Criar uma Intent para abrir a MainActivity
+                Intent intent = new Intent(MainActivity.this, Consultas.class);
+                // Iniciar a nova atividade
+                startActivity(intent);
+                // Encerrar a atividade atual
+                finish();
+            }
+        });
+
         recyclerView = findViewById(R.id.recyclerView);
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);

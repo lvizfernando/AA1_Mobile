@@ -3,6 +3,7 @@
     <string name="app_title">LifeCare</string>
     <string name="logotipo">Logotipo</string>
     <string name="title_activity_agendamento">Agendamento</string>
+    <string name="Person">Botão para consultas</string>
 
     <string name="profissionalButton">Botao do profissional</string>
     <string name="loading">Carregando</string>
