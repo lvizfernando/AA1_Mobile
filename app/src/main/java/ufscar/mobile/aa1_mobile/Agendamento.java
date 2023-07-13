@@ -60,6 +60,7 @@ public class Agendamento extends AppCompatActivity {
 
         // Configurar DatePicker
         datePicker = findViewById(R.id.datePicker);
+        datePicker.setMinDate(System.currentTimeMillis());
 
         // Configurar TimePicker
         timePicker = findViewById(R.id.timePicker);
