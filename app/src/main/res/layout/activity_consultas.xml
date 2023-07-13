@@ -36,14 +36,28 @@
         android:layout_width="match_parent"
         android:layout_height="659dp"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headerBackground"
+        app:layout_constraintTop_toBottomOf="@+id/textViewConsultas"
         tools:listitem="@layout/item_consultas">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/textViewConsultas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp"
+        android:text="@string/SuasConsultas"
+        android:textStyle="bold|italic"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerConsultas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerBackground" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
