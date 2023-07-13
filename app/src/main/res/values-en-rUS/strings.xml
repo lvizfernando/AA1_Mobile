@@ -19,4 +19,8 @@
     <string name="dataTitle">Date</string>
     <string name="timeTitle">Time</string>
     <string name="btnConfirmar">Confirm</string>
+    <string name="especialidade_pediatra">Pediatrician</string>
+    <string name="especialidade_cardiologista">Cardiologist</string>
+    <string name="especialidade_oftalmologista">Ophthalmologist</string>
+    <string name="especialidade_otorrinolaringologista">Otolaryngologist</string>
 </resources>

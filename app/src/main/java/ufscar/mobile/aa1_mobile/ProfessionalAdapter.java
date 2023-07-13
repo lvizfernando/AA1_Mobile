@@ -36,7 +36,13 @@ public class ProfessionalAdapter extends RecyclerView.Adapter<ProfessionalAdapte
     public void onBindViewHolder(@NonNull ProfessionalViewHolder holder, int position) {
         Professional professional = professionalList.get(position);
         holder.nome.setText(professional.getName());
-        holder.especialidade.setText(professional.getSpecialty());
+        String specialty = context.getResources().getString(
+                context.getResources().getIdentifier(
+                        "especialidade_" + professional.getSpecialty().toLowerCase(),
+                        "string",
+                        context.getPackageName()));
+        holder.especialidade.setText(specialty);
+
         holder.imagem.setImageResource(professional.getImageId());
     }
 

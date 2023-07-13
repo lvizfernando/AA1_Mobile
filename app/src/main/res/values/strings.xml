@@ -4,6 +4,14 @@
     <string name="logotipo">Logotipo</string>
     <string name="title_activity_agendamento">Agendamento</string>
     <string name="Person">Botão para consultas</string>
+    <string name="especialidade_pediatra">Pediatra</string>
+    <string name="especialidade_cardiologista">Cardiologista</string>
+    <string name="especialidade_oftalmologista">Oftalmologista</string>
+    <string name="especialidade_otorrinolaringologista">Otorrinolaringologista</string>
+    <!-- Adicione as outras especialidades aqui -->
+
+    <!-- Adicione as outras especialidades aqui -->
+
 
     <string name="profissionalButton">Botao do profissional</string>
     <string name="loading">Carregando</string>

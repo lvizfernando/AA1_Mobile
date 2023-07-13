@@ -45,6 +45,7 @@ public class Agendamento extends AppCompatActivity {
         int idProfissional = getIntent().getIntExtra("idProfissional", 1);
         String nomeProfissional = getIntent().getStringExtra("nomeProfissional");
         String especialidadeProfissional = getIntent().getStringExtra("especialidadeProfissional");
+        String especialidadeTraduzida = getResources().getString(getResources().getIdentifier("especialidade_" + especialidadeProfissional.toLowerCase(), "string", getPackageName()));
 
         imgHeader.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +81,7 @@ public class Agendamento extends AppCompatActivity {
                 int hora = timePicker.getHour();
                 int minuto = timePicker.getMinute();
                 // Criar um novo objeto Consulta com os detalhes da consulta
-                Consulta consulta = new Consulta(dia, mes, hora, minuto, ano, idProfissional, nomeProfissional, especialidadeProfissional);
+                Consulta consulta = new Consulta(dia, mes, hora, minuto, ano, idProfissional, nomeProfissional, especialidadeTraduzida);
                 consulta.setDia(dia);
                 consulta.setHora(hora);
                 consulta.setMinuto(minuto);
@@ -88,7 +89,7 @@ public class Agendamento extends AppCompatActivity {
                 consulta.setAno(ano);
                 consulta.setIdProfissional(idProfissional);
                 consulta.setNomeProfissional(nomeProfissional);
-                consulta.setEspecialidadeProfissional(especialidadeProfissional);
+                consulta.setEspecialidadeProfissional(especialidadeTraduzida);
 
                 uploadConsulta(consulta);
             }
