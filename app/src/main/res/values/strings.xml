@@ -14,8 +14,9 @@
     <string name="timeText">Horário</string>
     <string name="ImgProfissional">Imagem do profissional</string>
     <string name="textView">Profissionais disponíveis</string>
-    <string name="deleteButton">Deletar</string>
+    <string name="deleteButton">Cancelar</string>
     <string name="deleteAllButton">Deletar Tudo</string>
+    <string name="SuasConsultas">Suas Consultas</string>
 
     <string name="titleAgendamnento">Agendamento</string>
     <string name="dataTitle">Data</string>

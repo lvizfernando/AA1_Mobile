@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AA1_Mobile</string>
+    <string name="title_activity_agendamento">Appointment</string>
+    <string name="Person">Appointment button</string>
+    <string name="profissionalButton">Professional button</string>
+    <string name="loading">Loading</string>
+    <string name="bookButton">Schedule</string>
+    <string name="dateButton">Choose date</string>
+    <string name="timeButton">Choose time</string>
+    <string name="dateText">Date</string>
+    <string name="timeText">Time</string>
+    <string name="ImgProfissional">Professional image</string>
+    <string name="textView">Professionals available</string>
+    <string name="deleteButton">Cancel</string>
+    <string name="deleteAllButton">Delete All</string>
+    <string name="SuasConsultas">Your appointments</string>
+    <string name="titleAgendamnento">Appointments</string>
+    <string name="dataTitle">Date</string>
+    <string name="timeTitle">Time</string>
+    <string name="btnConfirmar">Confirm</string>
+</resources>
